@@ -1,0 +1,12 @@
+{
+  "name": "compound-paginator",
+  "version": "0.1.0",
+  "description": "Paginator for CompoundJS",
+  "main": "index.js",
+  "keywords": [
+    "paginator",
+    "compound"
+  ],
+  "author": "Edward Ishmuhametov",
+  "license": "BSD"
+}

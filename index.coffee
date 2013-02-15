@@ -1,12 +1,3 @@
-exports.init = ( compound )->
-    if undefined == compound.helpers.HelperSet
-        console.log 'Sorry, my Lord, i can`t create a helper. Maybe, this object isn`t Compound?'
-    else
-        console.log 'Paginator ready to die for my Lord!'
-        compound.helpers.HelperSet.prototype.paginator = ( totalCount, selfPage, CountOnPage )=>
-            @setData( totalCount, selfPage, CountOnPage )
-            @setHTML()
-
 exports.options = {
     "totalCount": null,
     "CountOnPage": 5,
@@ -15,9 +6,18 @@ exports.options = {
     "HTML": ''
 }
 
-exports.setData = ( totalCount, selfPage, CountOnPage )->
+exports.init = ( compound )->
+    if undefined == compound.helpers.HelperSet
+        console.log 'Sorry, my Lord, i can`t create a helper. Maybe, this object isn`t Compound?'
+    else
+        console.log 'Paginator ready to die for my Lord!'
+        compound.helpers.HelperSet.prototype.paginator = ( totalCount, selfPage, CountOnPage )=>
+            @showPaginaor( totalCount, selfPage, CountOnPage )
+
+
+exports.showPaginaor = ( totalCount, selfPage, CountOnPage )->
     if !totalCount
-        console.log 'My Lord, you forgot to give the "totalCount" in "paginator.setData()" method!'
+        console.log 'My Lord, you forgot to give the "totalCount" in "paginator.showPaginaor()" method!'
     else if 0 == totalCount
         console.log 'My lord, count of elements is 0, i can`t display on the page...'
     else
@@ -33,6 +33,7 @@ exports.setData = ( totalCount, selfPage, CountOnPage )->
         @options.nextPage    = @options.selfPage + 1
         if @options.nextPage > @options.totalPage
             @options.nextPage = @options.totalPage
+        @setHTML()
 
 exports.setHTML = ()->
     @HTML  = '<div class="pagination">'

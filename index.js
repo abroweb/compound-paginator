@@ -41,12 +41,14 @@
   };
 
   exports.setHTML = function() {
-    var i, _ref;
+    var activeClass, i, _ref;
     this.HTML = '<div class="pagination">';
     this.HTML += '<ul>';
     this.HTML += '<li><a href="?page=' + this.options.prevPage + '">«</a></li>';
     for (i = 1, _ref = this.options.totalPage; 1 <= _ref ? i <= _ref : i >= _ref; 1 <= _ref ? i++ : i--) {
-      this.HTML += '<li><a href="?page=' + i + '">' + i + '</a></li>';
+      activeClass = '';
+      if (i === this.options.selfPage) activeClass = ' class="active"';
+      this.HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>';
     }
     this.HTML += '<li><a href="?page=' + this.options.nextPage + '">»</a></li>';
     this.HTML += '</ul>';

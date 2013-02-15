@@ -39,8 +39,11 @@ exports.setHTML = ()->
     @HTML += '<ul>'
     @HTML += '<li><a href="?page=' + @options.prevPage + '">«</a></li>'
 
-    for i in [1..@options.totalPage ]
-        @HTML += '<li><a href="?page=' + i + '">' + i + '</a></li>'
+    for i in [1..@options.totalPage]
+        activeClass = ''
+        if i == @options.selfPage
+            activeClass = ' class="active"'
+        @HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>'
 
     @HTML += '<li><a href="?page=' + @options.nextPage + '">»</a></li>'
     @HTML += '</ul>'

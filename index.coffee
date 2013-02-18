@@ -40,11 +40,43 @@ exports.setHTML = ()->
     @HTML += '<ul>'
     @HTML += '<li><a href="?page=' + @options.prevPage + '">«</a></li>'
 
-    for i in [1..@options.totalPage]
-        activeClass = ''
-        if i == @options.selfPage
-            activeClass = ' class="active"'
-        @HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>'
+    if @options.totalPage > 10
+        for i in [1..3]
+            activeClass = ''
+            if i == @options.selfPage
+                activeClass = ' class="active"'
+            @HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>'
+
+        if @options.selfPage > 3 and @options.selfPage < @options.totalPage - 3
+            middle = @options.selfPage
+        else
+            middle = Math.round @options.totalPage/2 
+
+        middle_left = middle - 2
+        if middle_left <= 3
+          middle_left = 4
+
+        middle_right = middle + 2
+        if middle_left >= @options.totalPage - 3
+          middle_right = @options.totalPage - 4
+
+        for i in [middle_left..middle_right]
+            activeClass = ''
+            if i == @options.selfPage
+                activeClass = ' class="active"'
+            @HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>'
+
+        for i in [@options.totalPage-3..@options.totalPage]
+            activeClass = ''
+            if i == @options.selfPage
+                activeClass = ' class="active"'
+            @HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>'
+    else
+        for i in [1..@options.totalPage]
+            activeClass = ''
+            if i == @options.selfPage
+                activeClass = ' class="active"'
+            @HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>'
 
     @HTML += '<li><a href="?page=' + @options.nextPage + '">»</a></li>'
     @HTML += '</ul>'

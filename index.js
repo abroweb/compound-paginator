@@ -41,14 +41,43 @@
   };
 
   exports.setHTML = function() {
-    var activeClass, i, _ref;
+    var activeClass, i, middle, middle_left, middle_right, _ref, _ref2, _ref3;
     this.HTML = '<div class="pagination">';
     this.HTML += '<ul>';
     this.HTML += '<li><a href="?page=' + this.options.prevPage + '">«</a></li>';
-    for (i = 1, _ref = this.options.totalPage; 1 <= _ref ? i <= _ref : i >= _ref; 1 <= _ref ? i++ : i--) {
-      activeClass = '';
-      if (i === this.options.selfPage) activeClass = ' class="active"';
-      this.HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>';
+    if (this.options.totalPage > 10) {
+      for (i = 1; i <= 3; i++) {
+        activeClass = '';
+        if (i === this.options.selfPage) activeClass = ' class="active"';
+        this.HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>';
+      }
+      if (this.options.selfPage > 3 && this.options.selfPage < this.options.totalPage - 3) {
+        middle = this.options.selfPage;
+      } else {
+        middle = Math.round(this.options.totalPage / 2);
+      }
+      middle_left = middle - 2;
+      if (middle_left <= 3) middle_left = 4;
+      middle_right = middle + 2;
+      if (middle_left >= this.options.totalPage - 3) {
+        middle_right = this.options.totalPage - 4;
+      }
+      for (i = middle_left; middle_left <= middle_right ? i <= middle_right : i >= middle_right; middle_left <= middle_right ? i++ : i--) {
+        activeClass = '';
+        if (i === this.options.selfPage) activeClass = ' class="active"';
+        this.HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>';
+      }
+      for (i = _ref = this.options.totalPage - 3, _ref2 = this.options.totalPage; _ref <= _ref2 ? i <= _ref2 : i >= _ref2; _ref <= _ref2 ? i++ : i--) {
+        activeClass = '';
+        if (i === this.options.selfPage) activeClass = ' class="active"';
+        this.HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>';
+      }
+    } else {
+      for (i = 1, _ref3 = this.options.totalPage; 1 <= _ref3 ? i <= _ref3 : i >= _ref3; 1 <= _ref3 ? i++ : i--) {
+        activeClass = '';
+        if (i === this.options.selfPage) activeClass = ' class="active"';
+        this.HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>';
+      }
     }
     this.HTML += '<li><a href="?page=' + this.options.nextPage + '">»</a></li>';
     this.HTML += '</ul>';

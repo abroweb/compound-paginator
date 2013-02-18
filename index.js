@@ -51,7 +51,7 @@
         if (i === this.options.selfPage) activeClass = ' class="active"';
         this.HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>';
       }
-      if (this.options.selfPage > 3 && this.options.selfPage < this.options.totalPage - 3) {
+      if (this.options.selfPage > 3 && this.options.selfPage < (this.options.totalPage - 3)) {
         middle = this.options.selfPage;
       } else {
         middle = Math.round(this.options.totalPage / 2);
@@ -59,7 +59,7 @@
       middle_left = middle - 2;
       if (middle_left <= 3) middle_left = 4;
       middle_right = middle + 2;
-      if (middle_left >= this.options.totalPage - 3) {
+      if (middle_right >= this.options.totalPage - 3) {
         middle_right = this.options.totalPage - 4;
       }
       for (i = middle_left; middle_left <= middle_right ? i <= middle_right : i >= middle_right; middle_left <= middle_right ? i++ : i--) {

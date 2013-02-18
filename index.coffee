@@ -47,18 +47,18 @@ exports.setHTML = ()->
                 activeClass = ' class="active"'
             @HTML += '<li' + activeClass + '><a href="?page=' + i + '">' + i + '</a></li>'
 
-        if @options.selfPage > 3 and @options.selfPage < @options.totalPage - 3
+        if @options.selfPage > 3 and @options.selfPage < ( @options.totalPage - 3 )
             middle = @options.selfPage
         else
             middle = Math.round @options.totalPage/2 
 
         middle_left = middle - 2
         if middle_left <= 3
-          middle_left = 4
+            middle_left = 4
 
         middle_right = middle + 2
-        if middle_left >= @options.totalPage - 3
-          middle_right = @options.totalPage - 4
+        if middle_right >= @options.totalPage - 3
+            middle_right = @options.totalPage - 4
 
         for i in [middle_left..middle_right]
             activeClass = ''
